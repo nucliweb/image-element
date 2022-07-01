@@ -229,4 +229,4 @@ The browser send in the [HTTP Headers](https://developer.mozilla.org/en-US/docs/
 
 ## Acknowledgment
 
-- [Addy Osmani](https://github.com/addyosmani), for this [image](images/image-assy-ormani.jpg) and for all the tips that he are sharing with the community.
+- [Addy Osmani](https://github.com/addyosmani), for this [image](images/image-addy-osmani.jpg) and for all the tips that he are sharing with the community.
