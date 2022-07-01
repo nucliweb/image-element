@@ -206,10 +206,6 @@ The browser send in the [HTTP Headers](https://developer.mozilla.org/en-US/docs/
 
 > In the screenshot we can see that my current version browser supports `image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;`, so with a service of automatic image format, the service will send me an `avif` image format to render in the browser.
 
-https://res.cloudinary.com/nucliweb/image/upload/c_scale,f_auto,h_1200/v1656413393/test/Descubrimiento_2_ec62547230.png
-
-https://res.cloudinary.com/nucliweb/image/upload/c_scale,f_auto,h_1200/v1010101010/demo/image.png
-
 ```html
 <picture>
   <img 
