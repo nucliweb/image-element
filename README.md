@@ -2,7 +2,7 @@
 
 Repository to collect best practices for web images
 
-## Respinsive images
+## Responsive images
 
 ### With media
 
