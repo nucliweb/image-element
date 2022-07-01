@@ -4,6 +4,8 @@ Repository to collect best practices for web images
 
 ## Respinsive images
 
+### With media
+
 You can use `media` to define a mediaquiery as a breckpoint to load a responsive image.
 
 ```html
@@ -15,7 +17,7 @@ You can use `media` to define a mediaquiery as a breckpoint to load a responsive
 </picture>
 ```
 
-> In the above code, the browser load the `image.jpg` in mobile version, the `image-wide.jpg` in tablets resolutions or bigger, and the `image-ultrawide.jpg` in screen resolutions bigger than 1200px.
+> In the above code, the browser load the `image.jpg` in mobile version, the `image-wide.jpg` in tablets resolutions or bigger, and the `image-ultrawide.jpg` will be loaded in screen resolutions bigger than 1200px.
 
 <hr>
 
