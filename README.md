@@ -198,7 +198,7 @@ The previous code cover the scenario for all images out off viewport. Usualy the
 
 We see that we need a lot of code to have the better option to improve the user experience 🙈.
 
-We can use a CDN Image Service, like Cloudinary, to remove the part of code reference to image type because this service serve the better image supported by the browser.
+We can use a CDN Image Service, like [Cloudinary](https://cloudinary.com/), to remove the part of code reference to image type because this service serve the better image supported by the browser.
 
 The browser send in the [HTTP Headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers) the [`accept`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept) header value to indicates which content types, expressed as [MIME types](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types).
 
