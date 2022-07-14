@@ -21,14 +21,14 @@ We can use `media` to define a media query as a breakpoint to load a responsive 
 
 ### With sizes
 
-We can use [`sizes`](https://developer.mozilla.org/docs/Web/API/HTMLImageElement/sizes), that allows you to specify the layout width of the image for a list of media conditions.
+We can use [`sizes`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/sizes), that allows you to specify the layout width of the image for a list of media conditions.
 
 ```html
 <img 
   srcset="image-wide.jpg 600w,
-  sizes="(min-width: 600px) 100vw, 600px,
-         (min-width: 1200px) 100vw, 1200px"
           image-ultrawide.jpg 1200w"
+  sizes="(min-width: 600px) 600w,
+         (min-width: 1200px) 1200w"
   src="image.jpg" height="300" width="200" alt="Awesome image">
 ```
 
@@ -104,9 +104,9 @@ We can combine both approaches to serve modern image formats and responsive imag
 
 We can use several attributes to improve the Web Performance, aka **user experience**.
 
-- [`loading`](https://developer.mozilla.org/docs/Web/API/HTMLImageElement/loading) provides a hint to the user agent on how to handle the loading of the image which is currently outside the window's visual viewport. We can set it to `eager` (default value) which tells the browser to load the image as soon as the `<img>` element is processed, or `lazy` that tells the user agent to hold off on loading the image until the browser estimates that it will be needed imminently.
-- [`decoding`](https://developer.mozilla.org/docs/Web/API/HTMLImageElement/decoding) represents a hint given to the browser on how it should decode the image. The values are `sync` to decode the image synchronously for atomic presentation with other content, `async` to decode the image asynchronously and reduce delay in presenting other content, and `auto` (default mode) which indicates no preference for the decoding mode. The browser decides what is best for the user.
-- [`fetchpriority`](https://developer.mozilla.org/docs/Web/API/HTMLImageElement/fetchPriority) represents a hint given to the browser on how it should prioritize the fetching of the image relative to other images. The values are `high` to fetch the image at a high priority relative to other images, `low` to fetch the image at a low priority relative to other images, and `auto` (default mode) which indicates no preference for the fetch priority. The browser decides what is best for the user.
+- [`loading`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/loading) provides a hint to the user agent on how to handle the loading of the image which is currently outside the window's visual viewport. We can set it to `eager` (default value) which tells the browser to load the image as soon as the `<img>` element is processed, or `lazy` that tells the user agent to hold off on loading the image until the browser estimates that it will be needed imminently.
+- [`decoding`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/decoding) represents a hint given to the browser on how it should decode the image. The values are `sync` to decode the image synchronously for atomic presentation with other content, `async` to decode the image asynchronously and reduce delay in presenting other content, and `auto` (default mode) which indicates no preference for the decoding mode. The browser decides what is best for the user.
+- [`fetchpriority`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/fetchPriority) represents a hint given to the browser on how it should prioritize the fetching of the image relative to other images. The values are `high` to fetch the image at a high priority relative to other images, `low` to fetch the image at a low priority relative to other images, and `auto` (default mode) which indicates no preference for the fetch priority. The browser decides what is best for the user.
 
 ### Now we will use this attributes to improve the user experience of our images
 
@@ -200,7 +200,7 @@ We see that we need a lot of code to deliver the best user experience 🙈.
 
 We can use a CDN Image Service like [Cloudinary](https://cloudinary.com/) to remove the part of code that references the image format, as these services serve the best image format supported by the browser.
 
-The browser sends in the [HTTP Headers](https://developer.mozilla.org/docs/Web/HTTP/Headers) the [`accept`](https://developer.mozilla.org/docs/Web/HTTP/Headers/Accept) header value to indicate which content types, expressed as [MIME types](https://developer.mozilla.org/docs/Web/HTTP/Basics_of_HTTP/MIME_types).
+The browser sends in the [HTTP Headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers) the [`accept`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept) header value to indicate which content types, expressed as [MIME types](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types).
 
 ![Accept Headder](images/accept.png)
 
