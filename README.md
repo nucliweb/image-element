@@ -10,14 +10,15 @@ We can use `media` to define a media query as a breakpoint to load a responsive 
 
 ```html
 <picture>
-  <source srcset="image-wide.jpg" media="(min-width: 600px)">
   <source srcset="image-ultrawide.jpg" media="(min-width: 1200px)">
+  <source srcset="image-wide.jpg" media="(min-width: 600px)">
   <!-- The <img> tag is a fallback image (required in the <picture> tag) -->
   <img src="image.jpg" height="300" width="200" alt="Awesome image">
 </picture>
 ```
 
 > In the above code, the browser loads the `image.jpg` in mobile version, the `image-wide.jpg` in tablets resolutions or bigger, and the `image-ultrawide.jpg` will be loaded in screen resolutions bigger than 1200px.
+> NOTE: Browser finds the first matching condition and ignores everything after.
 
 ### With sizes
 
