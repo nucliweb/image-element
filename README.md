@@ -1,4 +1,4 @@
-# image-element
+# Best practices for images
 
 Repository to collect best practices for web images
 
@@ -107,7 +107,7 @@ We can use several attributes to improve the Web Performance, aka **user experie
 
 - [`loading`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/loading) provides a hint to the user agent on how to handle the loading of the image which is currently outside the window's visual viewport. We can set it to `eager` (default value) which tells the browser to load the image as soon as the `<img>` element is processed, or `lazy` that tells the user agent to hold off on loading the image until the browser estimates that it will be needed imminently.
 - [`decoding`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/decoding) represents a hint given to the browser on how it should decode the image. The values are `sync` to decode the image synchronously for atomic presentation with other content, `async` to decode the image asynchronously and reduce delay in presenting other content, and `auto` (default mode) which indicates no preference for the decoding mode. The browser decides what is best for the user.
-- [`fetchpriority`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/fetchPriority) represents a hint given to the browser on how it should prioritize the fetching of the image relative to other images. The values are `high` to fetch the image at a high priority relative to other images, `low` to fetch the image at a low priority relative to other images, and `auto` (default mode) which indicates no preference for the fetch priority. The browser decides what is best for the user.
+- [`fetchpriority`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/fetchPriority) represents a hint given to the browser on how it should prioritize the fetching of the image relative to other resources. The values are `high` to fetch the image at a high priority relative to other images, `low` to fetch the image at a low priority relative to other images, and `auto` (default mode) which indicates no preference for the fetch priority. The browser decides what is best for the user. By default images are initially `low`, until the browswer has done layout and knows what images are in the viewport. These are then boosted to `high` priority. You can make this boost happen earlier for an important impage (e.g. LCP image) you know has a high probability of being in the viewport by using `fetchpriority="high"`. Similiar you can deprirotise less important images that are technically in the viewport, but not viewable (e.g. second and third carousel images) by using `fetchpriority="low"`. Typically you would not need to use fetchpriority on off-screen images as the browser default (low until in viewport) is optimal there.
 
 ### Now we will use this attributes to improve the user experience of our images
 
@@ -194,6 +194,8 @@ The previous code covers the scenario for all images outside of the viewport. Us
 > In the above code, we changed the attribute `decoding` to `sync` to priorize the decoding, removed the attribute `loading` because the default behavior is `eager`, so we don't need it, and we add the attribute `fetchpriority="high"` to indicate to the browser to load the image as soon as possible.
 
 > By the way, we don't need to add these attributes to all `<source>` tags, only to `<img>` tags.
+
+If an image is not immediately discoverable in the HTML, a preload link tag, with `fetchpriority="high"` to boost the priority, can also allow it to be loaded as soon as possible. See [Optimize when the resource is discovered #](https://web.dev/optimize-lcp/#optimize-when-the-resource-is-discovered)
 
 ## Use a CDN Image Service
 
