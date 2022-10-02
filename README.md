@@ -74,8 +74,8 @@ We can combine both approaches to serve modern image formats and responsive imag
   <source
     sizes="(min-width: 600px) 100vw, 600px,
            (min-width: 1200px) 100vw, 1200px"
-    srcset="image-wide.jpg 600w,
-            image-ultrawide.jpg 1200w"
+    srcset="image-wide.jxl 600w,
+            image-ultrawide.jxl 1200w"
     type="image/jxl">
   <source
     sizes="(min-width: 600px) 100vw, 600px,
