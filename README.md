@@ -44,7 +44,6 @@ With the HTML tag `<picture>` we can specify the `type` in the `<source>` tag. T
 ```html
 <picture>
   <source type="image/webp" srcset="image.webp">
-  <source type="image/jpeg" srcset="image.jpg">
   <!-- The <img> tag is a fallback image (required in the <picture> tag) -->
   <img src="image.jpg" height="300" width="200" alt="Awesome image">
 </picture>
@@ -57,7 +56,6 @@ With the HTML tag `<picture>` we can specify the `type` in the `<source>` tag. T
   <source type="image/jxl" srcset="image.jxl">
   <source type="image/avif" srcset="image.avif">
   <source type="image/webp" srcset="image.webp">
-  <source type="image/jpeg" srcset="image.jpg">
   <!-- The <img> tag is a fallback image (required in the <picture> tag) -->
   <img src="image.jpg" height="300" width="200" alt="Awesome image">
 </picture>
