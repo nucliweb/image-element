@@ -2,6 +2,8 @@
 
 Repository to collect best practices for web images
 
+> This repository focuses on Web Performance best practices for images. Performance optimization does not replace accessibility: attributes like `alt` are essential and are out of scope for this guide.
+
 ## Responsive images
 
 ### With media
@@ -25,7 +27,7 @@ We can use `media` to define a media query as a breakpoint to load a responsive 
 We can use [`sizes`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/sizes), that allows you to specify the layout width of the image for a list of media conditions.
 
 ```html
-<img 
+<img
   srcset="image-wide.jpg 600w,
           image-ultrawide.jpg 1200w"
   sizes="(min-width: 600px) 600w,
@@ -39,6 +41,8 @@ We can use [`sizes`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageE
 
 > Usually, the next-gen image formats like [`WebP`](https://developers.google.com/speed/webp), [`AVIF`](https://aomediacodec.github.io/av1-avif/) or [`JPEG XL`](https://jpeg.org/jpegxl/), can optimize image weight while maintaining good image quality.
 
+> [`JPEG XL`](https://jpeg.org/jpegxl/) offers the best compression of all modern formats and is worth watching closely. As of 2025, support is available in Safari and Firefox (experimental). Chrome removed support in 2022 but the discussion remains open. Including it as the first `<source>` is safe: browsers that don't support it will simply fall through to the next format.
+
 With the HTML tag `<picture>` we can specify the `type` in the `<source>` tag. The type is the image format, and we can use it to serve modern image formats. The browser will use the first image format that it supports.
 
 ```html
@@ -49,10 +53,11 @@ With the HTML tag `<picture>` we can specify the `type` in the `<source>` tag. T
 </picture>
 ```
 
-> In the above code, the browser loads the first image format that it can render. E.g. Internet Explorer 11 nor Safari 13 can't load the [WebP](https://developers.google.com/speed/webp) image format (a next-gen image format), so they will load the `JPEG` image. 
+> In the above code, the browser loads the first image format that it can render. E.g. Internet Explorer 11 nor Safari 13 can't load the [WebP](https://developers.google.com/speed/webp) image format (a next-gen image format), so they will load the `JPEG` image.
 
 ```html
 <picture>
+  <!-- JPEG XL: best compression, supported in Safari and Firefox (experimental) -->
   <source type="image/jxl" srcset="image.jxl">
   <source type="image/avif" srcset="image.avif">
   <source type="image/webp" srcset="image.webp">
@@ -61,7 +66,7 @@ With the HTML tag `<picture>` we can specify the `type` in the `<source>` tag. T
 </picture>
 ```
 
-> In the above code, we list all the modern image formats, from "more optimized" to "less optimized". The browser will show the first image that it can load and render.
+> In the above code, we list modern image formats from "more optimized" to "less optimized". The browser will show the first image that it can load and render.
 
 ## Serve responsive and modern image formats
 
@@ -69,6 +74,7 @@ We can combine both approaches to serve modern image formats and responsive imag
 
 ```html
 <picture>
+  <!-- JPEG XL: best compression, supported in Safari and Firefox (experimental) -->
   <source
     sizes="(min-width: 600px) 100vw, 600px,
            (min-width: 1200px) 100vw, 1200px"
@@ -111,11 +117,12 @@ We can use several attributes to improve the Web Performance, aka **user experie
 
 ```html
 <picture>
+  <!-- JPEG XL: best compression, supported in Safari and Firefox (experimental) -->
   <source
     sizes="(min-width: 600px) 100vw, 600px,
            (min-width: 1200px) 100vw, 1200px"
-    srcset="image-wide.jpg 600w,
-            image-ultrawide.jpg 1200w"
+    srcset="image-wide.jxl 600w,
+            image-ultrawide.jxl 1200w"
     type="image/jxl">
   <source
     sizes="(min-width: 600px) 100vw, 600px,
@@ -136,7 +143,7 @@ We can use several attributes to improve the Web Performance, aka **user experie
             image-ultrawide.jpg 1200w"
     type="image/jpeg">
   <!-- The <img> tag is a fallback image (required in the <picture> tag) -->
-  <img 
+  <img
     loading="lazy"
     decoding="async"
     src="image.jpg"
@@ -154,11 +161,12 @@ The previous code covers the scenario for all images outside of the viewport. Us
 
 ```html
 <picture>
+  <!-- JPEG XL: best compression, supported in Safari and Firefox (experimental) -->
   <source
     sizes="(min-width: 600px) 100vw, 600px,
            (min-width: 1200px) 100vw, 1200px"
-    srcset="image-wide.jpg 600w,
-            image-ultrawide.jpg 1200w"
+    srcset="image-wide.jxl 600w,
+            image-ultrawide.jxl 1200w"
     type="image/jxl">
   <source
     sizes="(min-width: 600px) 100vw, 600px,
@@ -179,7 +187,7 @@ The previous code covers the scenario for all images outside of the viewport. Us
             image-ultrawide.jpg 1200w"
     type="image/jpeg">
   <!-- The <img> tag is a fallback image (required in the <picture> tag) -->
-  <img 
+  <img
     fetchpriority="high"
     decoding="sync"
     src="image.jpg"
@@ -189,11 +197,33 @@ The previous code covers the scenario for all images outside of the viewport. Us
 </picture>
 ```
 
-> In the above code, we changed the attribute `decoding` to `sync` to priorize the decoding, removed the attribute `loading` because the default behavior is `eager`, so we don't need it, and we add the attribute `fetchpriority="high"` to indicate to the browser to load the image as soon as possible.
+> In the above code, we changed the attribute `decoding` to `sync` to prioritize the decoding, removed the attribute `loading` because the default behavior is `eager`, so we don't need it, and we add the attribute `fetchpriority="high"` to indicate to the browser to load the image as soon as possible.
 
 > By the way, we don't need to add these attributes to all `<source>` tags, only to `<img>` tags.
 
-If an image is not immediately discoverable in the HTML, a preload link tag, with `fetchpriority="high"` to boost the priority, can also allow it to be loaded as soon as possible. See [Optimize when the resource is discovered #](https://web.dev/optimize-lcp/#optimize-when-the-resource-is-discovered)
+#### Preload the LCP image
+
+`fetchpriority="high"` boosts the download priority, but only once the browser has parsed the `<img>` tag in the HTML. If the LCP image is discovered late — inside a component, a carousel, or injected via JavaScript — the browser may start downloading it too late.
+
+A `<link rel="preload">` in the `<head>` solves this: it starts the download before the parser reaches the image.
+
+```html
+<!-- In the <head>: start the download as early as possible -->
+<link rel="preload" as="image" href="image.jpg" fetchpriority="high">
+```
+
+If you use `srcset` with modern formats, the preload tag supports `imagesrcset` and `imagesizes` so the browser preloads exactly the resource it will use:
+
+```html
+<link
+  rel="preload"
+  as="image"
+  imagesrcset="image-wide.avif 600w, image-ultrawide.avif 1200w"
+  imagesizes="(min-width: 600px) 100vw, 600px"
+  fetchpriority="high">
+```
+
+> See [Optimize when the resource is discovered](https://web.dev/optimize-lcp/#optimize-when-the-resource-is-discovered) for more details.
 
 ## Use a CDN Image Service
 
@@ -209,7 +239,7 @@ The browser sends in the [HTTP Headers](https://developer.mozilla.org/en-US/docs
 
 ```html
 <picture>
-  <img 
+  <img
     sizes="(min-width: 600px) 100vw, 600px,
            (min-width: 1200px) 100vw, 1200px"
     srcset="
