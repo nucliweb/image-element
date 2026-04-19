@@ -1,6 +1,6 @@
 # Best practices for images
 
-Repository to collect best practices for web images
+Repository to curated best practices for web images
 
 > This repository focuses on Web Performance best practices for images. Performance optimization does not replace accessibility: attributes like `alt` are essential and are out of scope for this guide.
 
